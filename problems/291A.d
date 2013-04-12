@@ -20,38 +20,31 @@ int solve(int[] d)
 {
 	d.sort();
 
-	int start;
+	int start = -1;
 	foreach (i, di; d) {
-		if (di == 0) start = i + 1;
-		else break;
+		if (di != 0) {
+			start = i;
+			break;
+		}
 	}
 
-	d = d[start .. $];
+	if (start != -1) {
+		d = d[start .. $];
+	}
+	else if (d[d.length - 1] == 0) {
+		return 0;
+	}
 
 	int count = 0;
-	int prev = 0;
-	int prev_count = 0;
 
-	foreach (di; d) {
-		if (di == prev) {
-			++prev_count;
+	foreach (tuple; d.group()) {
+		if (tuple[1] == 2) {
+			++count;
 		}
-		else {
-			if (prev_count > 2) {
-				count = -1;
-				break;
-			}
-			else if (prev_count == 2) {
-				++count;
-			}
-
-			prev = di;
-			prev_count = 1;
+		else if (tuple[1] > 2) {
+			return -1;
 		}
 	}
-
-	if (prev_count > 2) count = -1;
-	else if (prev_count == 2) ++count;
 
 	return count;
 }
