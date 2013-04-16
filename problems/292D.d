@@ -64,6 +64,8 @@ void go(int current)
 {
 	p[current] = false;
 
+	if (current !in v) return;
+
 	foreach (ref vertex; v[current]) {
 		if (p[vertex.comp] && (vertex.line < left || vertex.line > right)) {
 			go(vertex.comp);
