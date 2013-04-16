@@ -16,7 +16,7 @@ void main()
 	int n, m;
 	stdin.readf(" %s %s", &n, &m);
 
-	byte[] vertex = new byte[n];
+	int[] vertex = new int[n];
 
 	foreach (i; 0 .. m) {
 		int x, y;
